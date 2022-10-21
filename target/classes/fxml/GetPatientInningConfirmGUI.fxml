@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="250.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button fx:id="backBtn" layoutX="72.0" layoutY="178.0" mnemonicParsing="false" text="Back" />
+      <Button fx:id="confirmBtn" layoutX="182.0" layoutY="178.0" mnemonicParsing="false" text="Confirm" />
+      <Label layoutX="79.0" layoutY="61.0" text="Patient:" />
+      <Label layoutX="78.0" layoutY="100.0" text="To area:" />
+      <Label fx:id="patientLabel" layoutX="135.0" layoutY="61.0" text="Label" />
+      <Label fx:id="areaLabel" layoutX="135.0" layoutY="100.0" text="Label" />
+   </children>
+</AnchorPane>

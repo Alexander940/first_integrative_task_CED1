@@ -20,7 +20,7 @@ public class HomeGUI extends Stage {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/HomeGUI.fxml"));
             Parent root = loader.load();
 
-            Scene scene = new Scene(root, 250, 250);
+            Scene scene = new Scene(root, 600, 400);
             setScene(scene);
 
             addPatientBT = (Button) loader.getNamespace().get("addPatientBT");
@@ -49,9 +49,8 @@ public class HomeGUI extends Stage {
         });
 
         getPatientBT.setOnAction(event -> {
-
-
-
+            GetPatientInningGUI getPatientInningGUI = new GetPatientInningGUI();
+            getPatientInningGUI.show();
         });
 
         deletePatientBT.setOnAction(event -> {

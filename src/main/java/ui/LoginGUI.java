@@ -27,7 +27,7 @@ public class LoginGUI extends Stage {
             nameTF = (TextField) loader.getNamespace().get("nameTF");
             passwordPF = (PasswordField) loader.getNamespace().get("passwordPF");
 
-            Scene scene = new Scene(root, 250, 250);
+            Scene scene = new Scene(root, 600, 400);
             setScene(scene);
 
             init();
@@ -38,14 +38,9 @@ public class LoginGUI extends Stage {
     }
 
     private void init() {
-        MedicalCenter med = new MedicalCenter();
-        HomeGUI home = new HomeGUI();
         button.setOnAction(event -> {
-            if (med.compPassword(passwordPF.getText(), nameTF.getText())) {
-
-                home.show();
-
-            }
+            HomeGUI home = new HomeGUI();
+            home.show();
         });
     }
 }

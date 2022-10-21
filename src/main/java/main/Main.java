@@ -2,6 +2,7 @@ package main;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import model.PatientInventory;
 import ui.LoginGUI;
 
 public class Main extends Application {

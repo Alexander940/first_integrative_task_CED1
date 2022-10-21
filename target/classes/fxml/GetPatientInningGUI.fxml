@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="250.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Label layoutX="115.0" layoutY="38.0" text="Patient name" />
+        <TextField fx:id="patientNameTF" layoutX="72.0" layoutY="63.0" />
+        <Button fx:id="enqueuePatientBtn" layoutX="117.0" layoutY="197.0" mnemonicParsing="false" text="Enqueue" />
+      <Label layoutX="103.0" layoutY="117.0" text="Patient last name" />
+      <TextField fx:id="patientLastnameTF" layoutX="72.0" layoutY="140.0" />
+    </children>
+</AnchorPane>
