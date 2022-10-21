@@ -43,8 +43,9 @@ public class HomeGUI extends Stage {
         }) ;
 
         openListBT.setOnAction(event -> {
-
-
+            ShowListGUI showListGUI = new ShowListGUI();
+            showListGUI.show();
+            this.close();
 
         });
 

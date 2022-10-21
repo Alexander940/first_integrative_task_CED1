@@ -1,5 +1,6 @@
 package ui;
 
+import exceptions.PatientNotFoundException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -42,10 +43,16 @@ public class GetPatientInningGUI extends Stage {
             if(patientNameTF.getText().equals("") || patientLastnameTF.getText().equals("")){
                 AlertUtil.errorAlert("Error", "You should fill all fields", "");
             } else {
-                Patient patient = MedicalCenter.getInstance().findPatient(patientNameTF.getText()+patientLastnameTF.getText());
-                GetPatientInningAreaGUI getPatientInningAreaGUI = new GetPatientInningAreaGUI(patient);
-                getPatientInningAreaGUI.show();
-                this.close();
+                try{
+                    Patient patient = MedicalCenter.getInstance().findPatient(patientNameTF.getText()+patientLastnameTF.getText());
+                    GetPatientInningAreaGUI getPatientInningAreaGUI = new GetPatientInningAreaGUI(patient);
+                    getPatientInningAreaGUI.show();
+                    this.close();
+                } catch (PatientNotFoundException exception) {
+                    AlertUtil.errorAlert("Error", "The patient was not found", "");
+                    exception.printStackTrace();
+                }
+
             }
 
         });

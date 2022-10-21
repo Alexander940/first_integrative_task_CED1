@@ -1,5 +1,8 @@
 package model;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,6 +14,7 @@ import java.util.List;
 public class PatientInventory {
 
     private Hashtable patients;
+    private ObservableList<Patient> inventory;
 
     public PatientInventory() {
         this.patients = convertPatientsToObject();
@@ -19,12 +23,16 @@ public class PatientInventory {
     private Hashtable convertPatientsToObject() {
         String [] patientsData = readFile().split("-");
         Hashtable patients = new Hashtable();
+        ArrayList<Patient> patientArrayList = new ArrayList<>();
 
         for (String patient: patientsData) {
             String [] onePatient = patient.split(";");
             Patient patient1 = new Patient(onePatient[0], onePatient[1], Boolean.parseBoolean(onePatient[2]), onePatient[3]);
             patients.put(onePatient[0]+onePatient[1],patient1);
+            patientArrayList.add(patient1);
         }
+
+        this.inventory = FXCollections.observableArrayList(patientArrayList);
         
         return patients;
     }
@@ -60,5 +68,9 @@ public class PatientInventory {
 
     public Hashtable getPatients(){
         return this.patients;
+    }
+
+    public ObservableList<Patient> getInventory() {
+        return inventory;
     }
 }

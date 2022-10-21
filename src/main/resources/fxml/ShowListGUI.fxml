@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button fx:id="generalBtn" layoutX="270.0" layoutY="187.0" mnemonicParsing="false" text="General" />
+      <Button fx:id="priorityHematologyBtn" layoutX="83.0" layoutY="83.0" mnemonicParsing="false" text="Priority hematology" />
+      <Button fx:id="normalHematologyBtn" layoutX="81.0" layoutY="284.0" mnemonicParsing="false" text="Normal hematology" />
+      <Button fx:id="priorityGeneralBtn" layoutX="439.0" layoutY="83.0" mnemonicParsing="false" text="Priority General" />
+      <Button fx:id="normalGeneralBtn" layoutX="438.0" layoutY="284.0" mnemonicParsing="false" text="Normal General" />
+   </children>
+</AnchorPane>

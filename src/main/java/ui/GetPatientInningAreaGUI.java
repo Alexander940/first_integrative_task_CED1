@@ -15,6 +15,7 @@ public class GetPatientInningAreaGUI extends Stage {
 
     private Button hematologyBtn;
     private Button generalBtn;
+    private Button backBtn;
     private Patient patient;
 
     public GetPatientInningAreaGUI(Patient patient) {
@@ -46,6 +47,12 @@ public class GetPatientInningAreaGUI extends Stage {
         generalBtn.setOnAction(event -> {
             GetPatientInningConfirmGUI getPatientInningConfirmGUI = new GetPatientInningConfirmGUI(patient, MedicalCenter.Area.GENERAL);
             getPatientInningConfirmGUI.show();
+            this.close();
+        });
+
+        backBtn.setOnAction(event -> {
+            GetPatientInningGUI getPatientInningGUI = new GetPatientInningGUI();
+            getPatientInningGUI.show();
             this.close();
         });
     }

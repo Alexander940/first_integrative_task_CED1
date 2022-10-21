@@ -1,5 +1,11 @@
 package model;
 
+import exceptions.PatientNotFoundException;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+import java.util.ArrayList;
+
 public class MedicalCenter {
 
     public enum Area{
@@ -57,7 +63,85 @@ public class MedicalCenter {
 
     }
 
-    public Patient findPatient(String name){
-        return inventory.findPatient(name);
+    public Patient findPatient(String name) throws PatientNotFoundException {
+        Patient patient = inventory.findPatient(name);
+
+        if(patient == null){
+            throw new PatientNotFoundException();
+        } else {
+            return patient;
+        }
+    }
+
+    public PatientInventory getInventory() {
+        return inventory;
+    }
+
+    public ObservableList<Patient> getListNormalPatientsHematology(){
+        ArrayList<Patient> arrayList = new ArrayList<>();
+        Queue<Patient> auxQueue = new Queue<>();
+
+        for (int i = 0; i < normalPatientsHematology.size(); i++) {
+            Patient patient = normalPatientsHematology.dequeue();
+            arrayList.add(patient);
+            auxQueue.enqueue(patient);
+        }
+
+        for (int i = 0; i < auxQueue.size(); i++) {
+            normalPatientsHematology.enqueue(auxQueue.dequeue());
+        }
+
+        return FXCollections.observableArrayList(arrayList);
+    }
+
+    public ObservableList<Patient> getListPriorityPatientsHematology(){
+        ArrayList<Patient> arrayList = new ArrayList<>();
+        Queue<Patient> auxQueue = new Queue<>();
+
+        for (int i = 0; i < priorityPatientsHematology.size(); i++) {
+            Patient patient = priorityPatientsHematology.dequeue();
+            arrayList.add(patient);
+            auxQueue.enqueue(patient);
+        }
+
+        for (int i = 0; i < auxQueue.size(); i++) {
+            priorityPatientsHematology.enqueue(auxQueue.dequeue());
+        }
+
+        return FXCollections.observableArrayList(arrayList);
+    }
+
+    public ObservableList<Patient> getListNormalPatientsGeneral(){
+        ArrayList<Patient> arrayList = new ArrayList<>();
+        Queue<Patient> auxQueue = new Queue<>();
+
+        for (int i = 0; i < normalPatientsGeneralPurpose.size(); i++) {
+            Patient patient = normalPatientsGeneralPurpose.dequeue();
+            arrayList.add(patient);
+            auxQueue.enqueue(patient);
+        }
+
+        for (int i = 0; i < auxQueue.size(); i++) {
+            normalPatientsGeneralPurpose.enqueue(auxQueue.dequeue());
+        }
+
+        return FXCollections.observableArrayList(arrayList);
+    }
+
+    public ObservableList<Patient> getListPriorityPatientsGeneral(){
+        ArrayList<Patient> arrayList = new ArrayList<>();
+        Queue<Patient> auxQueue = new Queue<>();
+
+        for (int i = 0; i < priorityPatientsGeneralPurpose.size(); i++) {
+            Patient patient = priorityPatientsGeneralPurpose.dequeue();
+            arrayList.add(patient);
+            auxQueue.enqueue(patient);
+        }
+
+        for (int i = 0; i < auxQueue.size(); i++) {
+            priorityPatientsGeneralPurpose.enqueue(auxQueue.dequeue());
+        }
+
+        return FXCollections.observableArrayList(arrayList);
     }
 }
