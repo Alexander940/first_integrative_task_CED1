@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="250.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="64.0" layoutY="61.0" text="The patient:" />
+      <Label layoutX="21.0" layoutY="108.0" text="Enter to attention in:" />
+      <Label fx:id="namePatientLabel" layoutX="135.0" layoutY="61.0" text="Label" />
+      <Label fx:id="enterAttentionLabel" layoutX="135.0" layoutY="108.0" text="Label" />
+      <Button fx:id="confirmBtn" layoutX="123.0" layoutY="170.0" mnemonicParsing="false" text="Confirm" />
+   </children>
+</AnchorPane>

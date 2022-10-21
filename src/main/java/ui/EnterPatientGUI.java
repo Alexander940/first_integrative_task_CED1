@@ -4,24 +4,22 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.MedicalCenter;
 import model.Patient;
+import util.AlertUtil;
 
 import java.io.IOException;
 
-public class GetPatientInningAreaGUI extends Stage {
+public class EnterPatientGUI extends Stage {
 
     private Button hematologyBtn;
     private Button generalBtn;
     private Button backBtn;
-    private Patient patient;
 
-    public GetPatientInningAreaGUI(Patient patient) {
+    public EnterPatientGUI() {
         try{
-            this.patient = patient;
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/GetPatientInningAreaGUI.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/EnterPatientGUI.fxml"));
             Parent root = loader.load();
 
             hematologyBtn = (Button) loader.getNamespace().get("hematologyBtn");
@@ -40,20 +38,21 @@ public class GetPatientInningAreaGUI extends Stage {
 
     private void init() {
         hematologyBtn.setOnAction(event -> {
-            GetPatientInningConfirmGUI getPatientInningConfirmGUI = new GetPatientInningConfirmGUI(patient, MedicalCenter.Area.HEMATOLOGY);
-            getPatientInningConfirmGUI.show();
+            if(MedicalCenter.getInstance().getNormalPatientsHematology().isEmpty() || MedicalCenter.getInstance().getPriorityPatientsHematology().isEmpty()){
+                AlertUtil.errorAlert("Error", "There aren't patients to atent in the queue", "");
+            } else {
+
+            }
             this.close();
         });
 
         generalBtn.setOnAction(event -> {
-            GetPatientInningConfirmGUI getPatientInningConfirmGUI = new GetPatientInningConfirmGUI(patient, MedicalCenter.Area.GENERAL);
-            getPatientInningConfirmGUI.show();
+
             this.close();
         });
 
         backBtn.setOnAction(event -> {
-            GetPatientInningGUI getPatientInningGUI = new GetPatientInningGUI();
-            getPatientInningGUI.show();
+
             this.close();
         });
     }

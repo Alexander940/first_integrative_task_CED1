@@ -46,7 +46,7 @@ public class GetPatientInningConfirmGUI extends Stage {
         areaLabel.setText(String.valueOf(area));
 
         confirmBtn.setOnAction(event -> {
-            MedicalCenter.getInstance().enterPatient(patient, area);
+            MedicalCenter.getInstance().getPatientInning(patient, area);
             this.close();
         });
 

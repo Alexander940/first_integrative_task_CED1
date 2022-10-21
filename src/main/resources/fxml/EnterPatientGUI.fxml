@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="250.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button fx:id="hematologyBtn" layoutX="37.0" layoutY="112.0" mnemonicParsing="false" text="Hematology" />
+      <Button fx:id="generalBtn" layoutX="191.0" layoutY="112.0" mnemonicParsing="false" text="General" />
+      <Button fx:id="backBtn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Back" />
+   </children>
+</AnchorPane>

@@ -38,15 +38,15 @@ public class MedicalCenter {
         this.priorityPatientsGeneralPurpose = new Queue<>();
     }
 
-    public void enterPatient(Patient patient, Area areaToEnter){
+    public void getPatientInning(Patient patient, Area areaToEnter){
         if(areaToEnter == Area.HEMATOLOGY){
-            enterHematologyPatient(patient);
+            getPatientInningHematology(patient);
         } else {
-            enterGeneralPatient(patient);
+            getPatientInningGeneral(patient);
         }
     }
 
-    private void enterHematologyPatient(Patient patient){
+    private void getPatientInningHematology(Patient patient){
         if(patient.isPriority()){
             priorityPatientsHematology.enqueue(patient);
         } else {
@@ -54,7 +54,7 @@ public class MedicalCenter {
         }
     }
 
-    private void enterGeneralPatient(Patient patient){
+    private void getPatientInningGeneral(Patient patient){
         if(patient.isPriority()){
             priorityPatientsGeneralPurpose.enqueue(patient);
         } else {
@@ -73,8 +73,52 @@ public class MedicalCenter {
         }
     }
 
-    public PatientInventory getInventory() {
-        return inventory;
+    public Patient enterPatientToAttention(Area area){
+        if (area == Area.HEMATOLOGY){
+            return dequeueNextPatientHematology();
+        } else {
+            return dequeueNextPatientGeneral();
+        }
+    }
+
+    public Patient dequeueNextPatientHematology(){
+        if(priorityPatientsHematology.isEmpty()){
+            return normalPatientsHematology.dequeue();
+        } else {
+            return priorityPatientsHematology.dequeue();
+        }
+    }
+
+    public Patient dequeueNextPatientGeneral(){
+        if(priorityPatientsHematology.isEmpty()){
+            return normalPatientsGeneralPurpose.dequeue();
+        } else {
+            return priorityPatientsGeneralPurpose.dequeue();
+        }
+    }
+
+    public Patient seeNextPatient(Area area){
+        if (area == Area.HEMATOLOGY){
+            return assessListHematology();
+        } else {
+            return assessListGeneral();
+        }
+    }
+
+    public Patient assessListHematology(){
+        if(priorityPatientsHematology.isEmpty()){
+            return normalPatientsHematology.front();
+        } else {
+            return priorityPatientsHematology.front();
+        }
+    }
+
+    public Patient assessListGeneral(){
+        if(priorityPatientsGeneralPurpose.isEmpty()){
+            return normalPatientsGeneralPurpose.front();
+        } else {
+            return priorityPatientsGeneralPurpose.front();
+        }
     }
 
     public ObservableList<Patient> getListNormalPatientsHematology(){
@@ -143,5 +187,25 @@ public class MedicalCenter {
         }
 
         return FXCollections.observableArrayList(arrayList);
+    }
+
+    public Queue<Patient> getNormalPatientsHematology() {
+        return normalPatientsHematology;
+    }
+
+    public Queue<Patient> getPriorityPatientsHematology() {
+        return priorityPatientsHematology;
+    }
+
+    public Queue<Patient> getNormalPatientsGeneralPurpose() {
+        return normalPatientsGeneralPurpose;
+    }
+
+    public Queue<Patient> getPriorityPatientsGeneralPurpose() {
+        return priorityPatientsGeneralPurpose;
+    }
+
+    public PatientInventory getInventory() {
+        return inventory;
     }
 }
