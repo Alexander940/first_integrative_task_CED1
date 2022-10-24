@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class HomeGUI extends Stage {
 
-    private Button addPatientBT;
+    private Button enterPatientBT;
     private Button openListBT;
     private Button getPatientBT;
     private Button deletePatientBT;
@@ -23,7 +23,7 @@ public class HomeGUI extends Stage {
             Scene scene = new Scene(root, 600, 400);
             setScene(scene);
 
-            addPatientBT = (Button) loader.getNamespace().get("addPatientBT");
+            enterPatientBT = (Button) loader.getNamespace().get("enterPatientBT");
             openListBT = (Button) loader.getNamespace().get("openListBT");
             getPatientBT = (Button) loader.getNamespace().get("getPatientBT");
             deletePatientBT = (Button) loader.getNamespace().get("deletePatientBT");
@@ -36,10 +36,9 @@ public class HomeGUI extends Stage {
 
     private void init() {
 
-        addPatientBT.setOnAction(event -> {
-
-
-
+        enterPatientBT.setOnAction(event -> {
+            EnterPatientGUI enterPatientGUI = new EnterPatientGUI();
+            enterPatientGUI.show();
         }) ;
 
         openListBT.setOnAction(event -> {

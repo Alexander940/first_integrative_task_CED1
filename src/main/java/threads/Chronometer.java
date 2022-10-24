@@ -1,23 +1,26 @@
 package threads;
 
 import javafx.application.Platform;
+import model.MedicalCenter;
+import model.Patient;
 
 /**
  * This class counts how long the game lasts
  */
 public class Chronometer extends Thread{
 
-    private boolean flag;
     private int seconds;
+    private Patient patient;
+    private MedicalCenter.Area area;
 
-    public Chronometer(boolean flag) {
-        this.flag = flag;
+    public Chronometer(Patient patient, MedicalCenter.Area area) {
+        this.patient = patient;
+        this.area = area;
     }
 
     @Override
     public void run() {
-        while(flag){
-            //Platform.runLater(() -> );
+        while(seconds < 120){
             try{
                 seconds++;
                 Thread.sleep(1000);
@@ -25,13 +28,18 @@ public class Chronometer extends Thread{
                 exception.printStackTrace();
             }
         }
-    }
-
-    public void setFlag(boolean flag) {
-        this.flag = flag;
+        Platform.runLater(() -> MedicalCenter.getInstance().geyOutPatientQueue(this));
     }
 
     public int getSeconds() {
         return seconds;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public MedicalCenter.Area getArea() {
+        return area;
     }
 }

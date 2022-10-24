@@ -2,8 +2,8 @@ package model;
 
 public class Queue<T> {
 
-    Node head, tail;
-    int size;
+    private Node head, tail;
+    private int size;
 
     public Queue() {
         this.size = 0;
