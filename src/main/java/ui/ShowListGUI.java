@@ -55,8 +55,8 @@ public class ShowListGUI extends Stage {
         });
 
         priorityGeneralBtn.setOnAction(event -> {
-            ShowListNormalPatientsGeneralGUI showListNormalPatientsGeneralGUI = new ShowListNormalPatientsGeneralGUI();
-            showListNormalPatientsGeneralGUI.show();
+            ShowListPriorityPatientsGeneralGUI showListPriorityPatientsGeneralGUI = new ShowListPriorityPatientsGeneralGUI();
+            showListPriorityPatientsGeneralGUI.show();
         });
 
         normalGeneralBtn.setOnAction(event -> {

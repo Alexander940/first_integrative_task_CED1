@@ -3,6 +3,7 @@ package model;
 import exceptions.PatientNotFoundException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import threads.Chronometer;
 
 import java.util.ArrayList;
 
@@ -18,6 +19,7 @@ public class MedicalCenter {
     private Queue<Patient> normalPatientsGeneralPurpose;
     private Queue<Patient> priorityPatientsGeneralPurpose;
     private PatientInventory inventory;
+    private ArrayList<Chronometer> arrayListChronometer;
 
     /**
      * This method is about architecture singleton
@@ -36,31 +38,42 @@ public class MedicalCenter {
         this.priorityPatientsHematology = new Queue<>();
         this.normalPatientsGeneralPurpose = new Queue<>();
         this.priorityPatientsGeneralPurpose = new Queue<>();
+        this.arrayListChronometer = new ArrayList<>();
     }
 
     public void getPatientInning(Patient patient, Area areaToEnter){
         if(areaToEnter == Area.HEMATOLOGY){
-            getPatientInningHematology(patient);
+            getPatientInningHematology(patient, areaToEnter);
         } else {
-            getPatientInningGeneral(patient);
+            getPatientInningGeneral(patient, areaToEnter);
         }
     }
 
-    private void getPatientInningHematology(Patient patient){
+    private void getPatientInningHematology(Patient patient, MedicalCenter.Area area){
         if(patient.isPriority()){
             priorityPatientsHematology.enqueue(patient);
+            startChronometer(patient, area);
         } else {
             normalPatientsHematology.enqueue(patient);
+            startChronometer(patient, area);
         }
     }
 
-    private void getPatientInningGeneral(Patient patient){
+    private void getPatientInningGeneral(Patient patient, MedicalCenter.Area area){
         if(patient.isPriority()){
             priorityPatientsGeneralPurpose.enqueue(patient);
+            startChronometer(patient, area);
         } else {
             normalPatientsGeneralPurpose.enqueue(patient);
+            startChronometer(patient, area);
         }
 
+    }
+
+    private void startChronometer(Patient patient, MedicalCenter.Area area){
+        Chronometer chronometer = new Chronometer(patient, area);
+        chronometer.start();
+        arrayListChronometer.add(chronometer);
     }
 
     public Patient findPatient(String name) throws PatientNotFoundException {
@@ -70,6 +83,99 @@ public class MedicalCenter {
             throw new PatientNotFoundException();
         } else {
             return patient;
+        }
+    }
+
+    public void geyOutPatientQueue(Chronometer chronometer) {
+        if(chronometer.getArea() == Area.HEMATOLOGY){
+            if(chronometer.getPatient().isPriority()){
+                getOutPatientQueuePriorityHematology(chronometer);
+            } else {
+                getOutPatientQueueNormalHematology(chronometer);
+            }
+        } else {
+            if(chronometer.getPatient().isPriority()){
+                getOutPatientQueuePriorityGeneral(chronometer);
+            } else {
+                getOutPatientQueueNormalGeneral(chronometer);
+            }
+        }
+    }
+
+    public void getOutPatientQueuePriorityHematology(Chronometer chronometer) {
+        Queue<Patient> queue = new Queue<>();
+
+        for (int i = 0; i < priorityPatientsHematology.size(); i++) {
+            Patient patient = priorityPatientsHematology.dequeue();
+            if(chronometer.getPatient() != patient){
+                queue.enqueue(patient);
+            }
+        }
+
+        for (int i = 0; i < queue.size(); i++) {
+            priorityPatientsHematology.enqueue(queue.dequeue());
+        }
+
+        finishChronometer(chronometer);
+    }
+
+    public void getOutPatientQueueNormalHematology(Chronometer chronometer) {
+        Queue<Patient> queue = new Queue<>();
+
+        for (int i = 0; i < normalPatientsHematology.size(); i++) {
+            Patient patient = normalPatientsHematology.dequeue();
+            if(chronometer.getPatient() != patient){
+                queue.enqueue(patient);
+            }
+        }
+
+        for (int i = 0; i < queue.size(); i++) {
+            normalPatientsHematology.enqueue(queue.dequeue());
+        }
+
+        finishChronometer(chronometer);
+    }
+
+    public void getOutPatientQueuePriorityGeneral(Chronometer chronometer) {
+        Queue<Patient> queue = new Queue<>();
+
+        for (int i = 0; i < priorityPatientsGeneralPurpose.size(); i++) {
+            Patient patient = priorityPatientsGeneralPurpose.dequeue();
+            if(chronometer.getPatient() != patient){
+                queue.enqueue(patient);
+            }
+        }
+
+        for (int i = 0; i < queue.size(); i++) {
+            priorityPatientsGeneralPurpose.enqueue(queue.dequeue());
+        }
+
+        finishChronometer(chronometer);
+    }
+
+    public void getOutPatientQueueNormalGeneral(Chronometer chronometer) {
+        Queue<Patient> queue = new Queue<>();
+
+        for (int i = 0; i < normalPatientsGeneralPurpose.size(); i++) {
+            Patient patient = normalPatientsGeneralPurpose.dequeue();
+            if(chronometer.getPatient() != patient){
+                queue.enqueue(patient);
+            }
+        }
+
+        for (int i = 0; i < queue.size(); i++) {
+            normalPatientsGeneralPurpose.enqueue(queue.dequeue());
+        }
+
+        finishChronometer(chronometer);
+    }
+
+    private void finishChronometer(Chronometer chronometer) {
+        for (int i = 0; i < arrayListChronometer.size(); i++) {
+            if(arrayListChronometer.get(i) == chronometer){
+                arrayListChronometer.remove(i);
+                break;
+            }
         }
     }
 

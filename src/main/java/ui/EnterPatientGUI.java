@@ -38,21 +38,26 @@ public class EnterPatientGUI extends Stage {
 
     private void init() {
         hematologyBtn.setOnAction(event -> {
-            if(MedicalCenter.getInstance().getNormalPatientsHematology().isEmpty() || MedicalCenter.getInstance().getPriorityPatientsHematology().isEmpty()){
-                AlertUtil.errorAlert("Error", "There aren't patients to atent in the queue", "");
+            if(MedicalCenter.getInstance().getNormalPatientsHematology().isEmpty() && MedicalCenter.getInstance().getPriorityPatientsHematology().isEmpty()){
+                AlertUtil.errorAlert("Error", "There aren't patients to atend in the queue", "");
             } else {
-
+                EnterPatientConfirmationGUI enterPatientConfirmationGUI = new EnterPatientConfirmationGUI(MedicalCenter.Area.HEMATOLOGY);
+                enterPatientConfirmationGUI.show();
             }
             this.close();
         });
 
         generalBtn.setOnAction(event -> {
-
+            if(MedicalCenter.getInstance().getNormalPatientsGeneralPurpose().isEmpty() && MedicalCenter.getInstance().getPriorityPatientsGeneralPurpose().isEmpty()){
+                AlertUtil.errorAlert("Error", "There aren't patients to atend in the queue", "");
+            } else {
+                EnterPatientConfirmationGUI enterPatientConfirmationGUI = new EnterPatientConfirmationGUI(MedicalCenter.Area.GENERAL);
+                enterPatientConfirmationGUI.show();
+            }
             this.close();
         });
 
         backBtn.setOnAction(event -> {
-
             this.close();
         });
     }
