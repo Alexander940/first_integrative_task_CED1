@@ -196,7 +196,7 @@ public class MedicalCenter {
     }
 
     public Patient dequeueNextPatientGeneral(){
-        if(priorityPatientsHematology.isEmpty()){
+        if(priorityPatientsGeneralPurpose.isEmpty()){
             return normalPatientsGeneralPurpose.dequeue();
         } else {
             return priorityPatientsGeneralPurpose.dequeue();

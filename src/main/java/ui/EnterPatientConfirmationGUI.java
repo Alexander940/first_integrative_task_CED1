@@ -14,7 +14,8 @@ import java.io.IOException;
 public class EnterPatientConfirmationGUI extends Stage {
 
     private Button confirmBtn;
-    private Label patientNameLabel;
+    private Button backBtn;
+    private Label namePatientLabel;
     private Label enterAttentionLabel;
     private MedicalCenter.Area area;
 
@@ -25,7 +26,8 @@ public class EnterPatientConfirmationGUI extends Stage {
             Parent root = loader.load();
 
             confirmBtn = (Button) loader.getNamespace().get("confirmBtn");
-            patientNameLabel = (Label) loader.getNamespace().get("patientNameLabel");
+            backBtn = (Button) loader.getNamespace().get("backBtn");
+            namePatientLabel = (Label) loader.getNamespace().get("namePatientLabel");
             enterAttentionLabel = (Label) loader.getNamespace().get("enterAttentionLabel");
 
             Scene scene = new Scene(root, 300, 250);
@@ -39,7 +41,7 @@ public class EnterPatientConfirmationGUI extends Stage {
 
     private void init() {
         Patient patient = MedicalCenter.getInstance().seeNextPatient(area);
-        patientNameLabel.setText(patient.getName() + " " + patient.getLastname());
+        namePatientLabel.setText(patient.getName() + " " + patient.getLastname());
         enterAttentionLabel.setText(String.valueOf(area));
 
         confirmBtn.setOnAction(event -> {

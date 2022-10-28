@@ -29,7 +29,12 @@ public class Queue<T> {
 
     public T dequeue(){
         T aux = (T) head.fact;
-        head = head.next;
+        if(head.next == null){
+            head = null;
+        } else {
+            head = head.next;
+        }
+
         size--;
         return aux;
     }
